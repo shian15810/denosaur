@@ -1,4 +1,28 @@
 {
+  "0.40.0": [
+    "archive",
+    "bytes",
+    "datetime",
+    "encoding",
+    "examples",
+    "flags",
+    "fmt",
+    "fs",
+    "http",
+    "io",
+    "log",
+    "mime",
+    "node",
+    "path",
+    "permissions",
+    "signal",
+    "testing",
+    "textproto",
+    "types",
+    "util",
+    "uuid",
+    "ws"
+  ],
   "0.39.0": [
     "archive",
     "bytes",
