@@ -1,21 +1,26 @@
-import * as flags from "https://deno.land/std/flags/mod.ts";
-import * as log from "https://deno.land/std/log/mod.ts";
+import * as flags from "deno_std:flags";
+import * as log from "deno_std:log";
 
 import DenoStd from "./registries/deno_std.ts";
 import DenoX from "./registries/deno_x.ts";
+import Pika from "./registries/pika.ts";
 
 const { args } = Deno;
 
 const main = async (): Promise<void> => {
   await log.setup({});
 
-  console.log(flags.parse(args));
+  const arg = flags.parse(args);
+  console.log(arg);
 
   const denoStd = await DenoStd();
   console.log(denoStd);
 
   const denoX = await DenoX();
   console.log(denoX);
+
+  const pika = await Pika();
+  console.log(pika);
 };
 
 export default main;

@@ -1,1 +1,10 @@
-{}
+{
+  "imports": {
+    "deno_std:flags": "https://deno.land/std@v0.40.0/flags/mod.ts",
+    "deno_std:flags/": "https://deno.land/std@v0.40.0/flags/",
+    "deno_std:log": "https://deno.land/std@v0.40.0/log/mod.ts",
+    "deno_std:log/": "https://deno.land/std@v0.40.0/log/",
+    "pika:http-link-header": "https://cdn.pika.dev/http-link-header@v1.0.2",
+    "pika:semver": "https://cdn.pika.dev/semver@v7.2.1"
+  }
+}

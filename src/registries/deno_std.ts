@@ -1,5 +1,5 @@
-import LinkHeader from "https://cdn.pika.dev/http-link-header";
-import * as semver from "https://cdn.pika.dev/semver";
+import LinkHeader from "pika:http-link-header";
+import * as semver from "pika:semver";
 
 import localDatabase from "../../public/deno_std.database.json";
 
@@ -67,7 +67,7 @@ const getNewDatabase = async (versions: string[]): Promise<Database> => {
     type Json = { name: string; type: string }[];
 
     const url =
-      `https:///api.github.com/repos/denoland/deno/contents/std?ref=v${version}`;
+      `https://api.github.com/repos/denoland/deno/contents/std?ref=v${version}`;
     const response = await fetch(url, getRequestInit());
     if (!response.ok) throw response;
     const json: Json = await response.json();

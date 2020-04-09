@@ -1,0 +1,15 @@
+{
+  "https://cdn.pika.dev/-/http-link-header@v1.0.2-lDj58kKyP7cgWM1vNlER/dist=es2019/http-link-header.js": "626501a16d545d8b45153abce463af2a4665c11f6b2276ed204f2d96a306f977",
+  "https://cdn.pika.dev/-/semver@v7.2.1-mWa5j7mrWpyPexOPlYQb/dist=es2019/semver.js": "821a78a3077a506088d4bec4972735e28fda1821982ec81f79638b321902ec0b",
+  "https://cdn.pika.dev/http-link-header@v1.0.2": "cbd1ff79a1aa7d570a0fa4e25097fa0fe7fbee9ef69c2445cf0c43d9b2750ff2",
+  "https://cdn.pika.dev/semver@v7.2.1": "12598293ff13d7c5abc890d61cac43cefcfd88b2a8ac9cca610615b2936f1c50",
+  "https://deno.land/std@v0.40.0/flags/mod.ts": "d2365b9564332fde6fa39edd91e64528b18fd29f96902c36b425ea88b8d33e53",
+  "https://deno.land/std@v0.40.0/fmt/colors.ts": "52a9d836d0e49b05253330a6fc762b4e070b8a9f60cd6b3bc3e1f996f431d325",
+  "https://deno.land/std@v0.40.0/log/handlers.ts": "f3f4e1f36ed40a654858c42e1374364cc04c286366e24b93a1a9a4e968cb4721",
+  "https://deno.land/std@v0.40.0/log/levels.ts": "34dbe44f50a32761e339f84c0701bb7aec81311f4a401d9cf71afcbd96001e5c",
+  "https://deno.land/std@v0.40.0/log/logger.ts": "74fb87cb774d02ed53fb6ca0c83f97bc5e7a428964a7063a7351930417c01b89",
+  "https://deno.land/std@v0.40.0/log/mod.ts": "a91e63738a0d886d1acb1c236c9ad6b6173ffd218d3b2ef3106aa96b13830eac",
+  "https://deno.land/std@v0.40.0/testing/asserts.ts": "22cc8f3e37342ef24ddce6a39501a4d418de299345ab5e79c983eced828a0f1f",
+  "https://deno.land/std@v0.40.0/testing/diff.ts": "19c6766a2d03d507dcd9b38f27a134fe7df4e9abac08a51a8d9a826901de6dbf",
+  "https://deno.land/std@v0.40.0/testing/format.ts": "2c6bbaf398e6ac7513deb716a799226df6c9e0c7b54f343420774aee0fd673cb"
+}
