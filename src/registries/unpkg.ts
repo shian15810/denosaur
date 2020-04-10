@@ -1,6 +1,6 @@
 type Registry = { [module: string]: string[] };
 
-class Pika {
+class Unpkg {
   #registry: Registry = {};
 
   #inited = false;
@@ -12,6 +12,6 @@ class Pika {
   };
 }
 
-const pika = (): Promise<Pika> => new Pika().init();
+const unpkg = (): Promise<Unpkg> => new Unpkg().init();
 
-export default pika;
+export default unpkg;

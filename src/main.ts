@@ -4,6 +4,7 @@ import * as log from "deno_std:log";
 import DenoStd from "./registries/deno_std.ts";
 import DenoX from "./registries/deno_x.ts";
 import Pika from "./registries/pika.ts";
+import Unpkg from "./registries/unpkg.ts";
 
 const { args } = Deno;
 
@@ -21,6 +22,9 @@ const main = async (): Promise<void> => {
 
   const pika = await Pika();
   console.log(pika);
+
+  const unpkg = await Unpkg();
+  console.log(unpkg);
 };
 
 export default main;

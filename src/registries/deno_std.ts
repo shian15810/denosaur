@@ -84,9 +84,9 @@ const getNewDatabase = async (versions: string[]): Promise<Database> => {
 };
 
 const toRegistry = (database: Database): Registry =>
-  Object.keys(database).reduce(
-    (registry: Registry, version) =>
-      database[version].reduce(
+  Object.entries(database).reduce(
+    (registry: Registry, [version, modules]) =>
+      modules.reduce(
         (reg, mod) => ({ ...reg, [mod]: [...(reg[mod] ?? []), version] }),
         registry,
       ),
