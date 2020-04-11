@@ -21,6 +21,6 @@ jobs:
 
       - run: deno --version
 
-      - run: deno run --allow-all --importmap import_map.json --lock lock.json mod.ts
+      - run: deno --allow-all --importmap import_map.json --lock lock.json mod.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -5,6 +5,8 @@ class Unpkg {
 
   #inited = false;
   init = async (): Promise<this> => {
+    await Promise.resolve();
+
     if (this.#inited) return this;
 
     this.#inited = true;

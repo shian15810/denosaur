@@ -65,7 +65,7 @@ const getRemoteDatabase = async (): Promise<Database> => {
   return response.json();
 };
 
-const getAllVersions = async (latest?: string): Promise<Version[]> => {
+const getAllVersions = (latest?: string): Promise<Version[]> => {
   const getVersions = async (
     url: string,
     versions: Version[] = [],

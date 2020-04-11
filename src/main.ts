@@ -5,14 +5,18 @@ import DenoStd from "./registries/deno_std.ts";
 import DenoX from "./registries/deno_x.ts";
 import Pika from "./registries/pika.ts";
 import Unpkg from "./registries/unpkg.ts";
+import subcommands from "./subcommands/mod.ts";
 
 const { args } = Deno;
 
 const main = async (): Promise<void> => {
   await log.setup({});
 
-  const arg = flags.parse(args);
-  console.log(arg);
+  const arg = flags.parse(args, { "--": true });
+  const arg0 = arg._[0];
+  const scmd = typeof arg0 === "string" ? arg0 : "didYouMean";
+  if (Object.keys(subcommands).includes(scmd)) subcommands[scmd](arg);
+  else subcommands.didYouMean(arg);
 
   const denoStd = await DenoStd();
   console.log(denoStd);
