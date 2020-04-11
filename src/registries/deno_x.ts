@@ -10,7 +10,6 @@ type DatabaseModuleBase = {
   url?: string;
   desc?: string;
 };
-
 type DatabaseGithubModule = DatabaseModuleBase & {
   type: DatabaseModuleType.Github;
   owner: string;
@@ -24,40 +23,38 @@ type DatabaseUrlModule = DatabaseModuleBase & {
   type: DatabaseModuleType.Url;
   url: string;
 };
-
 type DatabaseModule =
   | DatabaseGithubModule
   | DatabaseEsmModule
   | DatabaseUrlModule;
-type Database = { [module: string]: DatabaseModule };
 
 enum RegistryModuleType {
   Github = "github",
   Npm = "npm",
 }
 type RegistryModuleReference = { [reference: string]: string };
-
 type RegistryGithubModule = {
   cached: boolean;
   type: RegistryModuleType.Github;
+  owner: string;
+  repo: string;
   reference: RegistryModuleReference;
   versions: string[];
   drafts: string[];
   prereleases: string[];
   deprecateds: string[];
-  owner: string;
-  repo: string;
 };
 type RegistryNpmModule = {
   cached: boolean;
   type: RegistryModuleType.Npm;
+  url: string;
   reference: RegistryModuleReference;
   versions: string[];
   deprecateds: string[];
-  url: string;
 };
-
 type RegistryModule = RegistryGithubModule | RegistryNpmModule;
+
+type Database = { [module: string]: DatabaseModule };
 type Registry = { [module: string]: RegistryModule };
 
 const getDatabase = async (): Promise<Database> => {
@@ -87,13 +84,13 @@ const toRegistry = (database: Database): Registry =>
           [module]: {
             cached: false,
             type: RegistryModuleType.Github,
+            owner: entry.owner,
+            repo: entry.repo,
             reference: {},
             versions: [],
             drafts: [],
             prereleases: [],
             deprecateds: [],
-            owner: entry.owner,
-            repo: entry.repo,
           },
         };
       }
@@ -105,10 +102,10 @@ const toRegistry = (database: Database): Registry =>
           [module]: {
             cached: false,
             type: RegistryModuleType.Npm,
+            url: entry.url.replace("${b}", "%s").replace("${v}", "%s"),
             reference: {},
             versions: [],
             deprecateds: [],
-            url: entry.url.replace("${b}", "%s").replace("${v}", "%s"),
           },
         };
       }

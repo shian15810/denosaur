@@ -1,4 +1,4 @@
-type Registry = { [module: string]: string[] };
+type Registry = {};
 
 class Unpkg {
   #registry: Registry = {};
