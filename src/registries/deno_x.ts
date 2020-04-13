@@ -27,6 +27,7 @@ type DatabaseModule =
   | DatabaseGithubModule
   | DatabaseEsmModule
   | DatabaseUrlModule;
+type Database = { [module: string]: DatabaseModule };
 
 enum RegistryModuleType {
   Github = "github",
@@ -53,8 +54,6 @@ type RegistryNpmModule = {
   deprecateds: string[];
 };
 type RegistryModule = RegistryGithubModule | RegistryNpmModule;
-
-type Database = { [module: string]: DatabaseModule };
 type Registry = { [module: string]: RegistryModule };
 
 const getDatabase = async (): Promise<Database> => {

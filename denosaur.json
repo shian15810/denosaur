@@ -1,0 +1,15 @@
+{
+  "name": "denosaur",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "deno_std:encoding": "^0.40.0",
+    "deno_std:flags": "^0.40.0",
+    "deno_std:fs": "^0.40.0",
+    "deno_std:log": "^0.40.0",
+    "deno_std:path": "^0.40.0",
+    "jspm:meant": "^1.0.1",
+    "pika:http-link-header": "^1.0.2",
+    "pika:semver": "^7.2.2"
+  }
+}

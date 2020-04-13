@@ -6,17 +6,19 @@ import DenoX from "./registries/deno_x.ts";
 import Pika from "./registries/pika.ts";
 import Unpkg from "./registries/unpkg.ts";
 import subcommands from "./subcommands/mod.ts";
+import denosaur from "./denosaur.ts";
 
 const { args } = Deno;
 
 const main = async (): Promise<void> => {
   await log.setup({});
 
+  await denosaur();
+
   const arg = flags.parse(args, { "--": true });
-  const arg0 = arg._[0];
-  const scmd = typeof arg0 === "string" ? arg0 : "didYouMean";
-  if (Object.keys(subcommands).includes(scmd)) subcommands[scmd](arg);
-  else subcommands.didYouMean(arg);
+  const [arg0] = arg._;
+  if (arg0 === undefined) subcommands.noSubcommand(arg);
+  else (subcommands[arg0.toString()] ?? subcommands.didYouMean)(arg);
 
   const denoStd = await DenoStd();
   console.log(denoStd);

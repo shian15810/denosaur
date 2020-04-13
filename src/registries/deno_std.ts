@@ -18,6 +18,7 @@ type DatabaseVersion = {
   deprecated: boolean;
   modules: string[];
 };
+type Database = { [version: string]: DatabaseVersion };
 
 enum RegistryModuleType {
   Github = "github",
@@ -34,8 +35,6 @@ type RegistryModule = {
   prereleases: string[];
   deprecateds: string[];
 };
-
-type Database = { [version: string]: DatabaseVersion };
 type Registry = { [module: string]: RegistryModule };
 
 const { env } = Deno;
@@ -91,9 +90,9 @@ const getAllVersions = (latest?: string): Promise<Version[]> => {
     }, versions);
     const link = response.headers.get("Link");
     if (link === null) return vers;
-    const next = LinkHeader.parse(link).rel("next")[0]?.uri;
-    if (next === undefined) return vers;
-    return getVersions(next, vers);
+    const { uri } = LinkHeader.parse(link).rel("next")[0] ?? {};
+    if (uri === undefined) return vers;
+    return getVersions(uri, vers);
   };
 
   const url =
