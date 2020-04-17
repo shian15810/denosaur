@@ -1,16 +1,16 @@
 {
   "imports": {
-    "deno_std:encoding/": "https://deno.land/std@v0.40.0/encoding/",
-    "deno_std:flags": "https://deno.land/std@v0.40.0/flags/mod.ts",
-    "deno_std:flags/": "https://deno.land/std@v0.40.0/flags/",
-    "deno_std:fs": "https://deno.land/std@v0.40.0/fs/mod.ts",
-    "deno_std:fs/": "https://deno.land/std@v0.40.0/fs/",
-    "deno_std:log": "https://deno.land/std@v0.40.0/log/mod.ts",
-    "deno_std:log/": "https://deno.land/std@v0.40.0/log/",
-    "deno_std:path": "https://deno.land/std@v0.40.0/path/mod.ts",
-    "deno_std:path/": "https://deno.land/std@v0.40.0/path/",
-    "jspm:meant": "https://dev.jspm.io/meant@1.0.1",
+    "deno_std:flags": "https://deno.land/std@v0.41.0/flags/mod.ts",
+    "deno_std:flags/": "https://deno.land/std@v0.41.0/flags/",
+    "deno_std:fs": "https://deno.land/std@v0.41.0/fs/mod.ts",
+    "deno_std:fs/": "https://deno.land/std@v0.41.0/fs/",
+    "deno_std:log": "https://deno.land/std@v0.41.0/log/mod.ts",
+    "deno_std:log/": "https://deno.land/std@v0.41.0/log/",
+    "deno_std:path": "https://deno.land/std@v0.41.0/path/mod.ts",
+    "deno_std:path/": "https://deno.land/std@v0.41.0/path/",
     "pika:http-link-header": "https://cdn.pika.dev/http-link-header@1.0.2",
-    "pika:semver": "https://cdn.pika.dev/semver@7.2.2"
+    "pika:lodash-es": "https://cdn.pika.dev/lodash-es@4.17.15",
+    "pika:semver": "https://cdn.pika.dev/semver@7.3.2",
+    "pika:wretch": "https://cdn.pika.dev/wretch@1.7.2"
   }
 }

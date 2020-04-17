@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
-    "deno_std:encoding": "^0.40.0",
-    "deno_std:flags": "^0.40.0",
-    "deno_std:fs": "^0.40.0",
-    "deno_std:log": "^0.40.0",
-    "deno_std:path": "^0.40.0",
-    "jspm:meant": "^1.0.1",
+    "deno_std:flags": "^0.41.0",
+    "deno_std:fs": "^0.41.0",
+    "deno_std:log": "^0.41.0",
+    "deno_std:path": "^0.41.0",
     "pika:http-link-header": "^1.0.2",
-    "pika:semver": "^7.2.2"
+    "pika:lodash-es": "^4.17.15",
+    "pika:semver": "^7.3.2",
+    "pika:wretch": "^1.7.2"
   }
 }
