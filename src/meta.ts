@@ -68,6 +68,6 @@ class Meta {
   };
 }
 
-const meta = await new Meta().init();
+const meta = (): Promise<Meta> => new Meta().init();
 
 export default meta;
