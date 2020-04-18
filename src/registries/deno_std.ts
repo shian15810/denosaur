@@ -2,6 +2,7 @@ import LinkHeader from "pika:http-link-header";
 import * as semver from "pika:semver";
 
 import localDatabase from "../../public/deno_std.database.json";
+import * as wretch from "../wretch.ts";
 
 type Version = {
   version: string;
@@ -37,42 +38,31 @@ type RegistryModule = {
 };
 type Registry = { [module: string]: RegistryModule };
 
-const { env } = Deno;
-
-const { GITHUB_TOKEN } = env();
-
-const getRequestInit = (): __domTypes.RequestInit | undefined =>
-  GITHUB_TOKEN === undefined
-    ? undefined
-    : { headers: { Authorization: `Bearer ${GITHUB_TOKEN}` } };
-
 const getLatestVersion = async (): Promise<string | undefined> => {
   type Json = { tag_name: string };
 
-  const url = "https://api.github.com/repos/denoland/deno/releases/latest";
-  const response = await fetch(url, getRequestInit());
-  if (!response.ok) throw response;
-  const { tag_name: tag }: Json = await response.json();
+  const { tag_name: tag }: Json = await wretch.githubApi
+    .url("/repos/denoland/deno/releases/latest")
+    .get()
+    .json();
   return semver.valid(tag) ?? undefined;
 };
 
-const getRemoteDatabase = async (): Promise<Database> => {
-  const url =
-    "https://raw.githubusercontent.com/shian15810/denosaur/master/public/deno_std.database.json";
-  const response = await fetch(url);
-  if (!response.ok) throw response;
-  return response.json();
-};
+const getRemoteDatabase = (): Promise<Database> =>
+  wretch.githubRaw
+    .url("/shian15810/denosaur/master/public/deno_std.database.json")
+    .get()
+    .json();
 
 const getAllVersions = (latest?: string): Promise<Version[]> => {
   const getVersions = async (
     url: string,
-    versions: Version[] = [],
+    replace: boolean,
+    versions: Version[],
   ): Promise<Version[]> => {
     type Json = { tag_name: string; draft: boolean; prerelease: boolean }[];
 
-    const response = await fetch(url, getRequestInit());
-    if (!response.ok) throw response;
+    const response = await wretch.githubApi.url(url, replace).get().res();
     const json: Json = await response.json();
     const vers = json.reduce((vs, { tag_name: tag, draft, prerelease }) => {
       const v = semver.valid(tag);
@@ -92,30 +82,30 @@ const getAllVersions = (latest?: string): Promise<Version[]> => {
     if (link === null) return vers;
     const { uri } = LinkHeader.parse(link).rel("next")[0] ?? {};
     if (uri === undefined) return vers;
-    return getVersions(uri, vers);
+    return getVersions(uri, true, vers);
   };
 
-  const url =
-    "https://api.github.com/repos/denoland/deno/releases?per_page=100";
-  return getVersions(url);
+  const url = "/repos/denoland/deno/releases?per_page=100";
+  return getVersions(url, false, []);
 };
 
-const getNewDatabase = async (versions: Version[]): Promise<Database> => {
+const getRemainingDatabase = async (versions: Version[]): Promise<Database> => {
   const getEntry = async ({
     version,
     ...entry
   }: Version): Promise<[string, DatabaseVersion]> => {
     type Json = { type: string; name: string }[];
 
-    const url = entry.deprecated
-      ? `https://api.github.com/repos/denoland/deno_std/contents?ref=v${version}`
-      : `https://api.github.com/repos/denoland/deno/contents/std?ref=v${version}`;
-    const response = await fetch(url, getRequestInit());
-    if (!response.ok) {
-      if (response.status !== 404) throw response;
-      return [version, { ...entry, modules: [] }];
-    }
-    const json: Json = await response.json();
+    const json: Json = await wretch.githubApi
+      .url(
+        entry.deprecated
+          ? "/repos/denoland/deno_std/contents"
+          : "/repos/denoland/deno/contents/std",
+      )
+      .query({ ref: `v${version}` })
+      .get()
+      .notFound(() => [])
+      .json();
     const modules = json.reduce(
       (mods: string[], { type, name: mod }) =>
         type === "dir" && !mod.startsWith(".") ? [...mods, mod] : mods,
@@ -127,6 +117,17 @@ const getNewDatabase = async (versions: Version[]): Promise<Database> => {
   const entries = await Promise.all(versions.map(getEntry));
   return Object.fromEntries(entries);
 };
+
+const sortDatabase = (database: Database): Database =>
+  semver
+    .rsort(Object.keys(database))
+    .reduce(
+      (db: Database, ver) => ({
+        ...db,
+        [ver]: { ...database[ver], modules: database[ver].modules.sort() },
+      }),
+      {},
+    );
 
 const toRegistry = (database: Database): Registry =>
   Object.entries(database).reduce(
@@ -160,15 +161,6 @@ const toRegistry = (database: Database): Registry =>
         }),
         registry,
       ),
-    {},
-  );
-
-const sortDatabase = (database: Database): Database =>
-  semver.rsort(Object.keys(database)).reduce(
-    (db: Database, ver) => ({
-      ...db,
-      [ver]: { ...database[ver], modules: database[ver].modules.sort() },
-    }),
     {},
   );
 
@@ -233,11 +225,11 @@ class DenoStd {
     }
 
     const allVersions = await getAllVersions(latestVersion);
-    const newVersions = allVersions.filter(
+    const remainingVersions = allVersions.filter(
       ({ version }) => this.#database[version] === undefined,
     );
-    const newDatabase = await getNewDatabase(newVersions);
-    this.#database = { ...this.#database, ...newDatabase };
+    const remainingDatabase = await getRemainingDatabase(remainingVersions);
+    this.#database = { ...this.#database, ...remainingDatabase };
     this.#database = sortDatabase(this.#database);
     this.#registry = toRegistry(this.#database);
     this.#registry = sortRegistry(this.#registry);

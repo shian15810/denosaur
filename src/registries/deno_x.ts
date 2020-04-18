@@ -1,28 +1,18 @@
+import * as wretch from "../wretch.ts";
+
 enum DatabaseModuleType {
   Github = "github",
   Esm = "esm",
   Url = "url",
 }
-type DatabaseModuleBase = {
-  type: DatabaseModuleType;
-  owner?: string;
-  repo?: string;
-  url?: string;
-  desc?: string;
-};
-type DatabaseGithubModule = DatabaseModuleBase & {
+type DatabaseGithubModule = {
   type: DatabaseModuleType.Github;
   owner: string;
   repo: string;
+  path?: string;
 };
-type DatabaseEsmModule = DatabaseModuleBase & {
-  type: DatabaseModuleType.Esm;
-  url: string;
-};
-type DatabaseUrlModule = DatabaseModuleBase & {
-  type: DatabaseModuleType.Url;
-  url: string;
-};
+type DatabaseEsmModule = { type: DatabaseModuleType.Esm; url: string };
+type DatabaseUrlModule = { type: DatabaseModuleType.Url; url: string };
 type DatabaseModule =
   | DatabaseGithubModule
   | DatabaseEsmModule
@@ -39,6 +29,7 @@ type RegistryGithubModule = {
   type: RegistryModuleType.Github;
   owner: string;
   repo: string;
+  path: string;
   reference: RegistryModuleReference;
   versions: string[];
   drafts: string[];
@@ -56,61 +47,49 @@ type RegistryNpmModule = {
 type RegistryModule = RegistryGithubModule | RegistryNpmModule;
 type Registry = { [module: string]: RegistryModule };
 
-const getDatabase = async (): Promise<Database> => {
-  const url =
-    "https://raw.githubusercontent.com/denoland/deno_website2/master/src/database.json";
-  const response = await fetch(url);
-  if (!response.ok) throw response;
-  return response.json();
-};
+const getDatabase = (): Promise<Database> =>
+  wretch.githubRaw
+    .url("/denoland/deno_website2/master/src/database.json")
+    .get()
+    .json();
 
 const toRegistry = (database: Database): Registry =>
-  Object.entries(database)
-    .map(([module, entry]): [string, DatabaseModule] => {
-      if (entry.type === DatabaseModuleType.Github) return [module, entry];
-      const { hostname, pathname } = new URL(entry.url);
-      if (hostname !== "github.com") return [module, entry];
-      const [, owner, repo] = pathname.split("/");
-      return [
-        module,
-        { ...entry, type: DatabaseModuleType.Github, owner, repo },
-      ];
-    })
-    .reduce((registry: Registry, [module, entry]) => {
-      if (entry.type === DatabaseModuleType.Github) {
-        return {
-          ...registry,
-          [module]: {
-            cached: false,
-            type: RegistryModuleType.Github,
-            owner: entry.owner,
-            repo: entry.repo,
-            reference: {},
-            versions: [],
-            drafts: [],
-            prereleases: [],
-            deprecateds: [],
-          },
-        };
-      }
+  Object.entries(database).reduce((registry: Registry, [module, entry]) => {
+    if (entry.type === DatabaseModuleType.Github) {
+      return {
+        ...registry,
+        [module]: {
+          cached: false,
+          type: RegistryModuleType.Github,
+          owner: entry.owner,
+          repo: entry.repo,
+          path: entry.path ?? "",
+          reference: {},
+          versions: [],
+          drafts: [],
+          prereleases: [],
+          deprecateds: [],
+        },
+      };
+    }
 
-      const { hostname } = new URL(entry.url);
-      if (["cdn.pika.dev", "unpkg.com"].includes(hostname)) {
-        return {
-          ...registry,
-          [module]: {
-            cached: false,
-            type: RegistryModuleType.Npm,
-            url: entry.url.replace("${b}", "%s").replace("${v}", "%s"),
-            reference: {},
-            versions: [],
-            deprecateds: [],
-          },
-        };
-      }
+    const { hostname } = new URL(entry.url);
+    if (["cdn.pika.dev", "unpkg.com"].includes(hostname)) {
+      return {
+        ...registry,
+        [module]: {
+          cached: false,
+          type: RegistryModuleType.Npm,
+          url: entry.url.replace("${b}", "%s").replace("${v}", "%s"),
+          reference: {},
+          versions: [],
+          deprecateds: [],
+        },
+      };
+    }
 
-      return registry;
-    }, {});
+    return registry;
+  }, {});
 
 class DenoX {
   #database: Database = {};
