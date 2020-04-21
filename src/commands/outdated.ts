@@ -23,8 +23,7 @@ const registriesMiddleware = async (
   const dependencies = Object.entries(meta.denosaur.dependencies).reduce(
     (deps: { [reg: string]: { [mod: string]: string } }, [dep, rng]) => {
       const [reg, mod] = dep.split(":");
-      if (reg === undefined) return deps;
-      if (mod === undefined) return deps;
+      if (reg === undefined || mod === undefined) return deps;
       return { ...deps, [reg]: { ...(deps[reg] ?? {}), [mod]: rng } };
     },
     {},

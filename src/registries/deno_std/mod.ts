@@ -9,12 +9,18 @@ class DenoStd {
   #latest?: string;
   #versions?: types.Version[];
   #database: types.Database = json;
-  #registry: types.Registry = {};
   #dependencies: types.Dependencies = {};
+  #registry: types.Registry = {};
   #inited = false;
 
   init = async (dependencies: types.Dependencies): Promise<void> => {
     if (this.#inited) return;
+
+    this.#database = { ...this.#database, ...(await init.getJson()) };
+    if (!(await init.getExist())) {
+      this.#inited = true;
+      return;
+    }
 
     this.#latest = await init.getLatest();
     if (this.#latest === undefined) {
@@ -23,21 +29,17 @@ class DenoStd {
         this.#versions.map(({ version }) => version),
         "*",
       ) ?? undefined;
-      if (this.#latest === undefined) return;
     }
-
-    this.#database = init.mergeDatabases(
-      this.#database,
-      await init.getJson(),
-      this.#latest,
-    );
-    if (this.#database[this.#latest]?.latest ?? false) {
-      this.#registry = init.toRegistry(this.#database);
-      this.#dependencies = init.toDependencies(this.#registry, dependencies);
-      this.#registry = init.cacheRegistry(
-        this.#registry,
+    if (
+      this.#latest !== undefined &&
+      Object.keys(this.#database).includes(this.#latest)
+    ) {
+      this.#dependencies = init.validateDependencies(dependencies);
+      this.#registry = init.toRegistry(
+        this.#database,
         Object.keys(this.#dependencies),
       );
+      this.#registry = init.initRegistry(this.#registry, this.#latest);
       this.#inited = true;
       return;
     }
@@ -46,17 +48,16 @@ class DenoStd {
     this.#versions = this.#versions.filter(
       ({ version }) => this.#database[version] === undefined,
     );
-    this.#database = init.mergeDatabases(
+    this.#database = {
+      ...this.#database,
+      ...(await init.getDatabase(this.#versions)),
+    };
+    this.#dependencies = init.validateDependencies(dependencies);
+    this.#registry = init.toRegistry(
       this.#database,
-      await init.getDatabase(this.#versions),
-      this.#latest,
-    );
-    this.#registry = init.toRegistry(this.#database);
-    this.#dependencies = init.toDependencies(this.#registry, dependencies);
-    this.#registry = init.cacheRegistry(
-      this.#registry,
       Object.keys(this.#dependencies),
     );
+    this.#registry = init.initRegistry(this.#registry, this.#latest);
     this.#inited = true;
   };
 }

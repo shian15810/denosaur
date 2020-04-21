@@ -46,7 +46,6 @@ const getVersions = (): Promise<types.Version[]> => {
         ...vs,
         {
           version,
-          latest: false,
           draft,
           prerelease,
           deprecated: semver.lt(version, "0.21.0"),
@@ -96,89 +95,80 @@ const getDatabase = async (
   return Object.fromEntries(entries);
 };
 
-const mergeDatabases = (
-  databaseA: types.Database,
-  databaseB: types.Database,
-  latest: string,
-): types.Database =>
-  Object.entries({ ...databaseA, ...databaseB }).reduce(
-    (database: types.Database, [version, entry]) => ({
-      ...database,
-      [version]: { ...entry, latest: version === latest },
-    }),
+const validateDependencies = (
+  dependencies: types.Dependencies,
+): types.Dependencies =>
+  Object.entries(dependencies).reduce(
+    (deps: types.Dependencies, [mod, rng]) =>
+      semver.validRange(rng) === null ? deps : { ...deps, [mod]: rng },
     {},
   );
 
-const toRegistry = (database: types.Database): types.Registry =>
+const toRegistry = (
+  database: types.Database,
+  modules: string[],
+): types.Registry =>
   Object.entries(database).reduce(
-    (
-      registry: types.Registry,
-      [version, { latest, draft, prerelease, deprecated, modules }],
-    ) =>
-      modules.reduce(
-        (reg, mod) => ({
-          ...reg,
-          [mod]: {
-            cached: false,
-            type: reg[mod]?.type ?? types.RegistryModuleType.Github,
-            owner: "denoland",
-            repo: deprecated ? "deno_std" : "deno",
-            path: deprecated ? "" : "std",
-            reference: {
-              ...(reg[mod]?.reference ?? {}),
-              ...(latest ? { latest: version } : {}),
-            },
-            versions: [...(reg[mod]?.versions ?? []), version],
-            drafts: [...(reg[mod]?.drafts ?? []), ...(draft ? [version] : [])],
-            prereleases: [
-              ...(reg[mod]?.prereleases ?? []),
-              ...(prerelease ? [version] : []),
-            ],
-            deprecateds: [
-              ...(reg[mod]?.deprecateds ?? []),
-              ...(deprecated ? [version] : []),
-            ],
-          },
-        }),
+    (registry: types.Registry, [version, entry]) =>
+      entry.modules.reduce(
+        (reg, mod) =>
+          modules.includes(mod)
+            ? {
+              ...reg,
+              [mod]: {
+                type: reg[mod]?.type ?? types.RegistryModuleType.Github,
+                owner: "denoland",
+                repo: entry.deprecated ? "deno_std" : "deno",
+                path: entry.deprecated ? "" : "std",
+                alias: { ...(reg[mod]?.alias ?? {}) },
+                versions: [...(reg[mod]?.versions ?? []), version],
+                drafts: [
+                  ...(reg[mod]?.drafts ?? []),
+                  ...(entry.draft ? [version] : []),
+                ],
+                prereleases: [
+                  ...(reg[mod]?.prereleases ?? []),
+                  ...(entry.prerelease ? [version] : []),
+                ],
+                deprecateds: [
+                  ...(reg[mod]?.deprecateds ?? []),
+                  ...(entry.deprecated ? [version] : []),
+                ],
+              },
+            }
+            : reg,
         registry,
       ),
     {},
   );
 
-const toDependencies = (
+const initRegistry = (
   registry: types.Registry,
-  dependencies: types.Dependencies,
-): types.Dependencies => {
-  const modules = Object.keys(dependencies);
-  return Object.keys(registry).reduce(
-    (deps: types.Dependencies, mod) =>
-      modules.includes(mod) && semver.validRange(dependencies[mod]) !== null
-        ? { ...deps, [mod]: dependencies[mod] }
-        : deps,
-    {},
-  );
-};
-
-const cacheRegistry = (
-  registry: types.Registry,
-  modules: string[],
+  latest?: string,
 ): types.Registry =>
   Object.entries(registry).reduce(
-    (reg: types.Registry, [mod, ent]) =>
-      modules.includes(mod) && !ent.cached
-        ? { ...reg, [mod]: { ...ent, cached: true } }
-        : reg,
+    (reg: types.Registry, [mod, ent]) => ({
+      ...reg,
+      [mod]: {
+        ...ent,
+        alias: {
+          ...ent.alias,
+          latest: latest !== undefined && ent.versions.includes(latest)
+            ? latest
+            : semver.maxSatisfying(ent.versions, "*") ?? "master",
+        },
+      },
+    }),
     {},
   );
 
 export {
-  cacheRegistry,
   getDatabase,
   getExist,
   getJson,
   getLatest,
   getVersions,
-  mergeDatabases,
-  toDependencies,
+  initRegistry,
   toRegistry,
+  validateDependencies,
 };

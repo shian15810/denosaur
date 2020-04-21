@@ -1,6 +1,5 @@
 {
-  "0.40.1": {
-    "latest": true,
+  "0.41.0": {
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -29,7 +28,6 @@
     ]
   },
   "0.40.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -59,7 +57,6 @@
     ]
   },
   "0.39.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -89,7 +86,6 @@
     ]
   },
   "0.38.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -121,7 +117,6 @@
     ]
   },
   "0.37.1": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -153,7 +148,6 @@
     ]
   },
   "0.37.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -185,7 +179,6 @@
     ]
   },
   "0.36.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -215,7 +208,6 @@
     ]
   },
   "0.35.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -245,7 +237,6 @@
     ]
   },
   "0.34.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -275,7 +266,6 @@
     ]
   },
   "0.33.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -305,7 +295,6 @@
     ]
   },
   "0.32.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -334,7 +323,6 @@
     ]
   },
   "0.31.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -365,7 +353,6 @@
     ]
   },
   "0.30.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -396,7 +383,6 @@
     ]
   },
   "0.29.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -428,7 +414,6 @@
     ]
   },
   "0.28.1": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -461,7 +446,6 @@
     ]
   },
   "0.28.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -494,7 +478,6 @@
     ]
   },
   "0.27.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -527,7 +510,6 @@
     ]
   },
   "0.26.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -560,7 +542,6 @@
     ]
   },
   "0.25.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -593,7 +574,6 @@
     ]
   },
   "0.24.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -626,7 +606,6 @@
     ]
   },
   "0.23.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -659,7 +638,6 @@
     ]
   },
   "0.22.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -692,7 +670,6 @@
     ]
   },
   "0.21.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,
@@ -725,7 +702,6 @@
     ]
   },
   "0.20.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -757,7 +733,6 @@
     ]
   },
   "0.19.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -789,7 +764,6 @@
     ]
   },
   "0.18.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -821,7 +795,6 @@
     ]
   },
   "0.17.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -852,7 +825,6 @@
     ]
   },
   "0.16.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -883,7 +855,6 @@
     ]
   },
   "0.15.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -914,21 +885,18 @@
     ]
   },
   "0.14.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.13.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.12.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -959,7 +927,6 @@
     ]
   },
   "0.11.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -991,7 +958,6 @@
     ]
   },
   "0.10.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1022,7 +988,6 @@
     ]
   },
   "0.9.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1052,7 +1017,6 @@
     ]
   },
   "0.8.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1080,7 +1044,6 @@
     ]
   },
   "0.7.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1108,7 +1071,6 @@
     ]
   },
   "0.6.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1135,7 +1097,6 @@
     ]
   },
   "0.5.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1161,7 +1122,6 @@
     ]
   },
   "0.4.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1187,14 +1147,12 @@
     ]
   },
   "0.3.11": {
-    "latest": false,
     "draft": false,
     "prerelease": true,
     "deprecated": true,
     "modules": []
   },
   "0.3.10": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1220,14 +1178,12 @@
     ]
   },
   "0.3.9": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.3.8": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1253,14 +1209,12 @@
     ]
   },
   "0.3.7": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.3.6": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1286,7 +1240,6 @@
     ]
   },
   "0.3.5": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1312,7 +1265,6 @@
     ]
   },
   "0.3.4": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1338,7 +1290,6 @@
     ]
   },
   "0.3.3": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1362,7 +1313,6 @@
     ]
   },
   "0.3.2": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1386,7 +1336,6 @@
     ]
   },
   "0.3.1": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1411,7 +1360,6 @@
     ]
   },
   "0.3.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1436,7 +1384,6 @@
     ]
   },
   "0.2.11": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1462,7 +1409,6 @@
     ]
   },
   "0.2.10": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1483,7 +1429,6 @@
     ]
   },
   "0.2.9": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1504,7 +1449,6 @@
     ]
   },
   "0.2.8": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1525,7 +1469,6 @@
     ]
   },
   "0.2.7": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1545,7 +1488,6 @@
     ]
   },
   "0.2.6": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1565,7 +1507,6 @@
     ]
   },
   "0.2.5": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1582,7 +1523,6 @@
     ]
   },
   "0.2.4": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
@@ -1596,119 +1536,102 @@
     ]
   },
   "0.2.3": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.2.2": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.2.1": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.2.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.12": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.11": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.10": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.9": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.8": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.7": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.6": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.5": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.4": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.3": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.2": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.1": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,
     "modules": []
   },
   "0.1.0": {
-    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": true,

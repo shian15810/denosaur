@@ -1,13 +1,11 @@
 type Version = {
   version: string;
-  latest: boolean;
   draft: boolean;
   prerelease: boolean;
   deprecated: boolean;
 };
 
 type DatabaseVersion = {
-  latest: boolean;
   draft: boolean;
   prerelease: boolean;
   deprecated: boolean;
@@ -15,24 +13,24 @@ type DatabaseVersion = {
 };
 type Database = { [version: string]: DatabaseVersion };
 
+type Dependencies = { [module: string]: string };
+
 enum RegistryModuleType {
   Github = "github",
 }
-type RegistryModuleReference = { [reference: string]: string };
+type RegistryModuleAlias = { [alias: string]: string };
 type RegistryModule = {
   type: RegistryModuleType.Github;
   owner: string;
   repo: string;
   path: string;
-  reference: RegistryModuleReference;
+  alias: RegistryModuleAlias;
   versions: string[];
   drafts: string[];
   prereleases: string[];
   deprecateds: string[];
 };
 type Registry = { [module: string]: RegistryModule };
-
-type Dependencies = { [module: string]: string };
 
 export {
   Database,
