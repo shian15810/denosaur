@@ -1,19 +1,20 @@
 type Registry = {};
 
+type Dependencies = { [module: string]: string };
+
 class Unpkg {
   #registry: Registry = {};
-
+  #dependencies: Dependencies = {};
   #inited = false;
-  init = async (): Promise<this> => {
+
+  init = async (dependencies: Dependencies): Promise<void> => {
     await Promise.resolve();
 
-    if (this.#inited) return this;
+    if (this.#inited) return;
 
+    this.#dependencies = dependencies;
     this.#inited = true;
-    return this;
   };
 }
 
-const unpkg = (): Promise<Unpkg> => new Unpkg().init();
-
-export default unpkg;
+export default Unpkg;

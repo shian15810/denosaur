@@ -4,7 +4,7 @@
     "deno_std:fs": "^0.41.0",
     "deno_std:path": "^0.41.0",
     "pika:http-link-header": "^1.0.2",
-    "pika:lodash-es": "^4.17.15",
+    "pika:is-what": "^3.8.0",
     "pika:semver": "^7.3.2",
     "pika:wretch": "^1.7.2"
   }

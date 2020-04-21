@@ -1,10 +1,11 @@
-import commands, { didYouMean, noCommand } from "./commands/mod.ts";
+import commands, * as command from "./commands/mod.ts";
 import * as deno from "./deno.ts";
 
 const main = (): Promise<void> => {
-  const [command] = deno.args._;
-  if (command === undefined) return noCommand();
-  return (commands[command] ?? didYouMean)();
+  const [cmd] = deno.args._;
+  if (cmd === undefined) return command.noCommand();
+  if (command.isCommandName(cmd)) return commands[cmd]();
+  return command.didYouMean();
 };
 
 export default main;

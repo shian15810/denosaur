@@ -1,3 +1,3 @@
-# denosaur
+# Denosaur
 
-Deno Saur Package Manager
+Deno Package Manager

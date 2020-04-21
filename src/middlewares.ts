@@ -1,4 +1,4 @@
-export type Next<Context> = (context: Context) => Promise<void>;
+type Next<Context> = (context: Context) => Promise<void>;
 
 type Middleware<Context> = (
   context: Context,
@@ -14,14 +14,20 @@ const next = async <Context>(
   return middleware(context, (ctx) => next(ctx, nexts));
 };
 
-class Middlewares<Context> {
-  middlewares: Middleware<Context>[] = [];
+class Middlewares<Context extends { [context: string]: unknown }> {
+  #context: Context;
+  #middlewares: Middleware<Context>[] = [];
+
+  constructor(context: Context) {
+    this.#context = context;
+  }
 
   use = (middleware: Middleware<Context>): void => {
-    this.middlewares = [...this.middlewares, middleware];
+    this.#middlewares = [...this.#middlewares, middleware];
   };
 
-  run = (context: Context): Promise<void> => next(context, this.middlewares);
+  run = (): Promise<void> => next(this.#context, this.#middlewares);
 }
 
+export { Next };
 export default Middlewares;

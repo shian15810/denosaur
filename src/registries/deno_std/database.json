@@ -1,6 +1,35 @@
 {
-  "0.40.0": {
+  "0.40.1": {
     "latest": true,
+    "draft": false,
+    "prerelease": false,
+    "deprecated": false,
+    "modules": [
+      "archive",
+      "bytes",
+      "datetime",
+      "encoding",
+      "examples",
+      "flags",
+      "fmt",
+      "fs",
+      "http",
+      "io",
+      "log",
+      "mime",
+      "node",
+      "path",
+      "permissions",
+      "signal",
+      "testing",
+      "textproto",
+      "util",
+      "uuid",
+      "ws"
+    ]
+  },
+  "0.40.0": {
+    "latest": false,
     "draft": false,
     "prerelease": false,
     "deprecated": false,

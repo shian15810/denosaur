@@ -1,7 +1,7 @@
 import * as fs from "deno_std:fs";
 import * as path from "deno_std:path";
 
-import * as _ from "pika:lodash-es";
+import * as what from "pika:is-what";
 
 import * as deno from "./deno.ts";
 
@@ -22,7 +22,12 @@ const getRoot = async (
 };
 
 const isDenosaur = (denosaur: unknown): denosaur is Denosaur =>
-  _.isPlainObject(denosaur);
+  what.isPlainObject(denosaur) &&
+  (denosaur.dependencies === undefined ||
+    (what.isPlainObject(denosaur.dependencies) &&
+      Object.values(denosaur.dependencies).every(
+        (range) => typeof range === "string",
+      )));
 const getDenosaur = async (root: string): Promise<Denosaur | undefined> => {
   const file = path.resolve(root, "denosaur.json");
   const exist = await fs.exists(file);
@@ -33,7 +38,12 @@ const getDenosaur = async (root: string): Promise<Denosaur | undefined> => {
 };
 
 const isImportmap = (importmap: unknown): importmap is Importmap =>
-  _.isPlainObject(importmap);
+  what.isPlainObject(importmap) &&
+  (importmap.imports === undefined ||
+    (what.isPlainObject(importmap.imports) &&
+      Object.values(importmap.imports).every(
+        (url) => typeof url === "string",
+      )));
 const getImportmap = async (root: string): Promise<Importmap | undefined> => {
   const file = path.resolve(root, "import_map.json");
   const exist = await fs.exists(file);
@@ -45,29 +55,30 @@ const getImportmap = async (root: string): Promise<Importmap | undefined> => {
 
 class Meta {
   #root?: string;
-
   #denosaur?: Denosaur;
   #importmap?: Importmap;
-
   #inited = false;
-  init = async (): Promise<this> => {
-    if (this.#inited) return this;
 
-    const { root } = path.parse(deno.cwd);
-    this.#root = await getRoot(deno.cwd, root);
+  get root(): string | undefined {
+    return this.#root;
+  }
+  get denosaur(): Denosaur | undefined {
+    return this.#denosaur;
+  }
 
+  init = async (): Promise<void> => {
+    if (this.#inited) return;
+
+    this.#root = await getRoot(deno.cwd, path.parse(deno.cwd).root);
     if (this.#root === undefined) {
       this.#inited = true;
-      return this;
+      return;
     }
 
     this.#denosaur = await getDenosaur(this.#root);
     this.#importmap = await getImportmap(this.#root);
     this.#inited = true;
-    return this;
   };
 }
 
-const meta = (): Promise<Meta> => new Meta().init();
-
-export default meta;
+export default Meta;

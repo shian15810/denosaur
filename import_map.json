@@ -6,9 +6,9 @@
     "deno_std:fs/": "https://deno.land/std@v0.41.0/fs/",
     "deno_std:path": "https://deno.land/std@v0.41.0/path/mod.ts",
     "deno_std:path/": "https://deno.land/std@v0.41.0/path/",
-    "pika:http-link-header": "https://cdn.pika.dev/http-link-header@1.0.2",
-    "pika:lodash-es": "https://cdn.pika.dev/lodash-es@4.17.15",
-    "pika:semver": "https://cdn.pika.dev/semver@7.3.2",
-    "pika:wretch": "https://cdn.pika.dev/wretch@1.7.2"
+    "pika:http-link-header": "https://cdn.pika.dev/http-link-header@v1.0.2",
+    "pika:is-what": "https://cdn.pika.dev/is-what@v3.8.0",
+    "pika:semver": "https://cdn.pika.dev/semver@v7.3.2",
+    "pika:wretch": "https://cdn.pika.dev/wretch@v1.7.2"
   }
 }

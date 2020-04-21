@@ -6,8 +6,10 @@ type Env = { GITHUB_TOKEN?: string };
 
 const { _, "--": dashdash }: Args = flags.parse(Deno.args, { "--": true });
 
-export const args = { _: _.map((arg) => arg.toString()), "--": dashdash ?? [] };
+const args = { _: _.map((arg) => arg.toString()), "--": dashdash ?? [] };
 
-export const cwd = Deno.cwd();
+const cwd = Deno.cwd();
 
-export const env: Env = Deno.env();
+const env: Env = Deno.env();
+
+export { args, cwd, env };

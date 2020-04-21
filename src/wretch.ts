@@ -11,6 +11,8 @@ const getGithubApi = (token?: string): Wretcher => {
 const getGithubRaw = (): Wretcher =>
   wretch("https://raw.githubusercontent.com");
 
-export const githubApi = getGithubApi(deno.env.GITHUB_TOKEN);
+const githubApi = getGithubApi(deno.env.GITHUB_TOKEN);
 
-export const githubRaw = getGithubRaw();
+const githubRaw = getGithubRaw();
+
+export { githubApi, githubRaw };

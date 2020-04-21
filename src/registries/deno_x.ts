@@ -1,3 +1,5 @@
+import * as semver from "pika:semver";
+
 import * as wretch from "../wretch.ts";
 
 enum DatabaseModuleType {
@@ -47,6 +49,8 @@ type RegistryNpmModule = {
 type RegistryModule = RegistryGithubModule | RegistryNpmModule;
 type Registry = { [module: string]: RegistryModule };
 
+type Dependencies = { [module: string]: string };
+
 const getDatabase = (): Promise<Database> =>
   wretch.githubRaw
     .url("/denoland/deno_website2/master/src/database.json")
@@ -63,7 +67,10 @@ const toRegistry = (database: Database): Registry =>
           type: RegistryModuleType.Github,
           owner: entry.owner,
           repo: entry.repo,
-          path: entry.path ?? "",
+          path: entry.path
+            ?.split("/")
+            .filter((path) => path !== "")
+            .join("/") ?? "",
           reference: {},
           versions: [],
           drafts: [],
@@ -94,18 +101,17 @@ const toRegistry = (database: Database): Registry =>
 class DenoX {
   #database: Database = {};
   #registry: Registry = {};
-
+  #dependencies: Dependencies = {};
   #inited = false;
-  init = async (): Promise<this> => {
-    if (this.#inited) return this;
+
+  init = async (dependencies: Dependencies): Promise<void> => {
+    if (this.#inited) return;
 
     this.#database = await getDatabase();
     this.#registry = toRegistry(this.#database);
+    this.#dependencies = dependencies;
     this.#inited = true;
-    return this;
   };
 }
 
-const denoX = (): Promise<DenoX> => new DenoX().init();
-
-export default denoX;
+export default DenoX;
