@@ -17,7 +17,7 @@ class DenoStd {
     if (this.#inited) return;
 
     this.#database = { ...this.#database, ...(await init.getJson()) };
-    if (!(await init.getExist())) {
+    if (!(await init.getExists())) {
       this.#inited = true;
       return;
     }

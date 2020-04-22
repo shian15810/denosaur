@@ -10,7 +10,7 @@ const getJson = (): Promise<types.Database> =>
     .get()
     .json();
 
-const getExist = (): Promise<boolean> =>
+const getExists = (): Promise<boolean> =>
   wretch.githubCom
     .url("/denoland/deno")
     .head()
@@ -164,7 +164,7 @@ const initRegistry = (
 
 export {
   getDatabase,
-  getExist,
+  getExists,
   getJson,
   getLatest,
   getVersions,

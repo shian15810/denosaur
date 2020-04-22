@@ -9,16 +9,13 @@ type Denosaur = { dependencies?: { [dependency: string]: string } };
 
 type Importmap = { imports?: { [map: string]: string } };
 
-const getRoot = async (
-  from: string,
-  to: string,
-): Promise<string | undefined> => {
-  if (from === to) return undefined;
-  const file = path.resolve(from, "denosaur.json");
-  const exist = await fs.exists(file);
-  if (exist) return from;
-  const parent = path.resolve(from, "..");
-  return getRoot(parent, to);
+const getRoot = async (cwd: string): Promise<string | undefined> => {
+  const dirname = path.dirname(cwd);
+  if (cwd === dirname) return;
+  const filename = path.resolve(cwd, "denosaur.json");
+  const exists = await fs.exists(filename);
+  if (exists) return cwd;
+  return getRoot(dirname);
 };
 
 const isDenosaur = (denosaur: unknown): denosaur is Denosaur =>
@@ -29,10 +26,10 @@ const isDenosaur = (denosaur: unknown): denosaur is Denosaur =>
         (range) => typeof range === "string",
       )));
 const getDenosaur = async (root: string): Promise<Denosaur | undefined> => {
-  const file = path.resolve(root, "denosaur.json");
-  const exist = await fs.exists(file);
-  if (!exist) return undefined;
-  const denosaur = await fs.readJson(file);
+  const filename = path.resolve(root, "denosaur.json");
+  const exists = await fs.exists(filename);
+  if (!exists) return undefined;
+  const denosaur = await fs.readJson(filename);
   if (!isDenosaur(denosaur)) return undefined;
   return denosaur;
 };
@@ -45,10 +42,10 @@ const isImportmap = (importmap: unknown): importmap is Importmap =>
         (url) => typeof url === "string",
       )));
 const getImportmap = async (root: string): Promise<Importmap | undefined> => {
-  const file = path.resolve(root, "import_map.json");
-  const exist = await fs.exists(file);
-  if (!exist) return undefined;
-  const importmap = await fs.readJson(file);
+  const filename = path.resolve(root, "import_map.json");
+  const exists = await fs.exists(filename);
+  if (!exists) return undefined;
+  const importmap = await fs.readJson(filename);
   if (!isImportmap(importmap)) return undefined;
   return importmap;
 };
@@ -69,7 +66,7 @@ class Meta {
   init = async (): Promise<void> => {
     if (this.#inited) return;
 
-    this.#root = await getRoot(deno.cwd, path.parse(deno.cwd).root);
+    this.#root = await getRoot(deno.cwd);
     if (this.#root === undefined) {
       this.#inited = true;
       return;
