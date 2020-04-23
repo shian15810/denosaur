@@ -1,10 +1,10 @@
-type Registry = {};
-
 type Dependencies = { [module: string]: string };
 
+type Registry = {};
+
 class Pika {
-  #registry: Registry = {};
   #dependencies: Dependencies = {};
+  #registry: Registry = {};
   #inited = false;
 
   init = async (dependencies: Dependencies): Promise<void> => {

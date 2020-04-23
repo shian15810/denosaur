@@ -1,5 +1,5 @@
 import DenoStd from "./deno_std/mod.ts";
-import DenoX from "./deno_x.ts";
+import DenoX from "./deno_x/mod.ts";
 import Pika from "./pika.ts";
 import Unpkg from "./unpkg.ts";
 

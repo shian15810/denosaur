@@ -3,12 +3,12 @@ import * as semver from "pika:semver";
 import * as init from "./init.ts";
 import * as types from "./types.ts";
 
-import json from "./database.json";
+import database from "./database.json";
 
 class DenoStd {
   #latest?: string;
   #versions?: types.Version[];
-  #database: types.Database = json;
+  #database: types.Database = database;
   #dependencies: types.Dependencies = {};
   #registry: types.Registry = {};
   #inited = false;
@@ -16,7 +16,7 @@ class DenoStd {
   init = async (dependencies: types.Dependencies): Promise<void> => {
     if (this.#inited) return;
 
-    this.#database = { ...this.#database, ...(await init.getJson()) };
+    this.#database = { ...this.#database, ...(await init.getDatabase()) };
     if (!(await init.getExists())) {
       this.#inited = true;
       return;
@@ -50,7 +50,7 @@ class DenoStd {
     );
     this.#database = {
       ...this.#database,
-      ...(await init.getDatabase(this.#versions)),
+      ...(await init.getDatabaseFromVersions(this.#versions)),
     };
     this.#dependencies = init.validateDependencies(dependencies);
     this.#registry = init.toRegistry(

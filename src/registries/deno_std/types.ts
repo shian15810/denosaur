@@ -19,17 +19,20 @@ enum RegistryModuleType {
   Github = "github",
 }
 type RegistryModuleAlias = { [alias: string]: string };
-type RegistryModule = {
-  type: RegistryModuleType.Github;
-  owner: string;
-  repo: string;
-  path: string;
-  alias: RegistryModuleAlias;
+type RegistryGithubVersion = {
   versions: string[];
   drafts: string[];
   prereleases: string[];
   deprecateds: string[];
 };
+type RegistryGithubModule = {
+  type: RegistryModuleType.Github;
+  owner: string;
+  repo: string;
+  path: string;
+  alias: RegistryModuleAlias;
+} & RegistryGithubVersion;
+type RegistryModule = RegistryGithubModule;
 type Registry = { [module: string]: RegistryModule };
 
 export {

@@ -4,7 +4,7 @@ import * as semver from "pika:semver";
 import * as types from "./types.ts";
 import * as wretch from "../../wretch.ts";
 
-const getJson = (): Promise<types.Database> =>
+const getDatabase = (): Promise<types.Database> =>
   wretch.githubRaw
     .url("/shian15810/denosaur/master/src/registries/deno_std/database.json")
     .get()
@@ -63,7 +63,7 @@ const getVersions = (): Promise<types.Version[]> => {
   return getReleases(url, false, []);
 };
 
-const getDatabase = async (
+const getDatabaseFromVersions = async (
   versions: types.Version[],
 ): Promise<types.Database> => {
   const getContents = async ({
@@ -164,8 +164,8 @@ const initRegistry = (
 
 export {
   getDatabase,
+  getDatabaseFromVersions,
   getExists,
-  getJson,
   getLatest,
   getVersions,
   initRegistry,
