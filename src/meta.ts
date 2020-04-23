@@ -1,5 +1,6 @@
 import * as fs from "deno_std:fs";
 import * as path from "deno_std:path";
+import * as asserts from "deno_std:testing/asserts.ts";
 
 import * as what from "pika:is-what";
 
@@ -15,13 +16,13 @@ type RawImportmap = { imports?: { [map: string]: string } };
 type ImportmapImports = { [registry: string]: { [module: string]: string } };
 type Importmap = RawImportmap & { _imports: ImportmapImports };
 
-const getRoot = async (cwd: string): Promise<string | undefined> => {
+const getRoot = (cwd: string, root: string): string => {
   const dirname = path.dirname(cwd);
-  if (cwd === dirname) return;
+  if (cwd === dirname) return root;
   const filename = path.resolve(cwd, "denosaur.json");
-  const exists = await fs.exists(filename);
+  const exists = fs.existsSync(filename);
   if (exists) return cwd;
-  return getRoot(dirname);
+  return getRoot(dirname, root);
 };
 
 const isRawDenosaur = (denosaur: unknown): denosaur is RawDenosaur =>
@@ -31,12 +32,12 @@ const isRawDenosaur = (denosaur: unknown): denosaur is RawDenosaur =>
       Object.values(denosaur.dependencies).every(
         (version) => typeof version === "string",
       )));
-const getDenosaur = async (root: string): Promise<Denosaur | undefined> => {
+const getDenosaur = (root: string): Denosaur => {
   const filename = path.resolve(root, "denosaur.json");
-  const exists = await fs.exists(filename);
-  if (!exists) return undefined;
-  const denosaur = await fs.readJson(filename);
-  if (!isRawDenosaur(denosaur)) return undefined;
+  const exists = fs.existsSync(filename);
+  if (!exists) return { _dependencies: {} };
+  const denosaur = fs.readJsonSync(filename);
+  asserts.assert(isRawDenosaur(denosaur), `${filename} format is invalid.`);
   const rawDenosaur = Object.entries(denosaur).reduce(
     (raw: RawDenosaur, [key, value]) =>
       key.startsWith("_") ? raw : { ...raw, [key]: value },
@@ -64,12 +65,12 @@ const isRawImportmap = (importmap: unknown): importmap is RawImportmap =>
       Object.values(importmap.imports).every(
         (url) => typeof url === "string",
       )));
-const getImportmap = async (root: string): Promise<Importmap | undefined> => {
+const getImportmap = (root: string): Importmap => {
   const filename = path.resolve(root, "import_map.json");
-  const exists = await fs.exists(filename);
-  if (!exists) return undefined;
-  const importmap = await fs.readJson(filename);
-  if (!isRawImportmap(importmap)) return undefined;
+  const exists = fs.existsSync(filename);
+  if (!exists) return { _imports: {} };
+  const importmap = fs.readJsonSync(filename);
+  asserts.assert(isRawImportmap(importmap), `${filename} format is invalid.`);
   const rawImportmap = Object.entries(importmap).reduce(
     (raw: RawImportmap, [key, value]) =>
       key.startsWith("_") ? raw : { ...raw, [key]: value },
@@ -91,31 +92,16 @@ const getImportmap = async (root: string): Promise<Importmap | undefined> => {
 };
 
 class Meta {
-  #root?: string;
-  #denosaur?: Denosaur;
-  #importmap?: Importmap;
-  #inited = false;
+  #root = getRoot(deno.cwd, deno.cwd);
+  #denosaur = getDenosaur(this.#root);
+  #importmap = getImportmap(this.#root);
 
-  get root(): string | undefined {
-    return this.#root;
-  }
-  get denosaur(): Denosaur | undefined {
+  get denosaur(): Denosaur {
     return this.#denosaur;
   }
-
-  init = async (): Promise<void> => {
-    if (this.#inited) return;
-
-    this.#root = await getRoot(deno.cwd);
-    if (this.#root === undefined) {
-      this.#inited = true;
-      return;
-    }
-
-    this.#denosaur = await getDenosaur(this.#root);
-    this.#importmap = await getImportmap(this.#root);
-    this.#inited = true;
-  };
+  get importmap(): Importmap {
+    return this.#importmap;
+  }
 }
 
 export default Meta;
