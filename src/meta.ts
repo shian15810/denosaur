@@ -6,14 +6,12 @@ import * as what from "pika:is-what";
 
 import * as deno from "./deno.ts";
 
-type RawDenosaur = { dependencies?: { [dependency: string]: string } };
-type DenosaurDependencies = {
-  [registry: string]: { [module: string]: string };
-};
+type DenosaurDependencies = { [dependency: string]: string };
+type RawDenosaur = { dependencies?: DenosaurDependencies };
 type Denosaur = RawDenosaur & { _dependencies: DenosaurDependencies };
 
-type RawImportmap = { imports?: { [map: string]: string } };
-type ImportmapImports = { [registry: string]: { [module: string]: string } };
+type ImportmapImports = { [map: string]: string };
+type RawImportmap = { imports?: ImportmapImports };
 type Importmap = RawImportmap & { _imports: ImportmapImports };
 
 const getRoot = (cwd: string, root: string): string => {
@@ -47,11 +45,7 @@ const getDenosaur = (root: string): Denosaur => {
     (dependencies: DenosaurDependencies, [dependency, version]) => {
       const deps = dependency.split(":");
       if (deps.length !== 2 || deps.includes("")) return dependencies;
-      const [registry, module] = deps;
-      return {
-        ...dependencies,
-        [registry]: { ...(dependencies[registry] ?? {}), [module]: version },
-      };
+      return { ...dependencies, [dependency]: version };
     },
     {},
   );
@@ -80,11 +74,7 @@ const getImportmap = (root: string): Importmap => {
     (imports: ImportmapImports, [map, url]) => {
       const maps = map.split(":");
       if (maps.length !== 2 || maps.includes("")) return imports;
-      const [registry, module] = maps;
-      return {
-        ...imports,
-        [registry]: { ...(imports[registry] ?? {}), [module]: url },
-      };
+      return { ...imports, [map]: url };
     },
     {},
   );
