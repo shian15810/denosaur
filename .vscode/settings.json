@@ -1,0 +1,7 @@
+{
+  "[javascript]": { "editor.defaultFormatter": "axetroy.vscode-deno" },
+  "[typescript]": { "editor.defaultFormatter": "axetroy.vscode-deno" },
+  "deno.enable": true,
+  "deno.import_map": "import_map.json",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
