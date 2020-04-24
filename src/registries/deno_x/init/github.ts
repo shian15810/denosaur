@@ -4,6 +4,13 @@ import * as semver from "pika:semver";
 import * as types from "../types.ts";
 import * as wretch from "../../../wretch.ts";
 
+type Version = {
+  version: string;
+  draft: boolean;
+  prerelease: boolean;
+  deprecated: boolean;
+};
+
 const getExists = (owner: string, repo: string): Promise<boolean> =>
   wretch.githubCom
     .url(`/${owner}/${repo}`)
@@ -26,12 +33,12 @@ const getLatest = async (
   return semver.valid(latest.tag_name) ?? undefined;
 };
 
-const getVersions = (owner: string, repo: string): Promise<types.Version[]> => {
+const getVersions = (owner: string, repo: string): Promise<Version[]> => {
   const getReleases = async (
     url: string,
     replace: boolean,
-    versions: types.Version[],
-  ): Promise<types.Version[]> => {
+    versions: Version[],
+  ): Promise<Version[]> => {
     type Releases = { tag_name: string; draft: boolean; prerelease: boolean }[];
 
     const response = await wretch.githubApi.url(url, replace).get().res();
@@ -52,4 +59,23 @@ const getVersions = (owner: string, repo: string): Promise<types.Version[]> => {
   return getReleases(url, false, []);
 };
 
-export { getExists, getLatest, getVersions };
+const getVersion = async (
+  owner: string,
+  repo: string,
+): Promise<types.RegistryGithubVersion> => {
+  const versions = await getVersions(owner, repo);
+  return versions.reduce(
+    (
+      github: types.RegistryGithubVersion,
+      { version, draft, prerelease, deprecated },
+    ) => ({
+      versions: [...github.versions, version],
+      drafts: [...github.drafts, ...(draft ? [version] : [])],
+      prereleases: [...github.prereleases, ...(prerelease ? [version] : [])],
+      deprecateds: [...github.deprecateds, ...(deprecated ? [version] : [])],
+    }),
+    { versions: [], drafts: [], prereleases: [], deprecateds: [] },
+  );
+};
+
+export { getExists, getLatest, getVersion };

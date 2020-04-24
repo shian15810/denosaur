@@ -21,6 +21,7 @@ enum RegistryModuleType {
   Github = "github",
   Npm = "npm",
 }
+type RegistryModuleAlias = { [alias: string]: string };
 type RegistryGithubModule = {
   type: RegistryModuleType.Github;
   owner: string;
@@ -30,7 +31,7 @@ type RegistryGithubModule = {
   versions: string[];
   drafts: string[];
   prereleases: string[];
-  latest: string;
+  alias: RegistryModuleAlias;
 };
 type RegistryNpmModule = {
   type: RegistryModuleType.Npm;
@@ -39,8 +40,7 @@ type RegistryNpmModule = {
   versioned: boolean;
   versions: string[];
   deprecateds: string[];
-  latest: string;
-  tags: { [tag: string]: string };
+  alias: RegistryModuleAlias;
 };
 type RegistryModule = RegistryGithubModule | RegistryNpmModule;
 type Registry = { [module: string]: RegistryModule };

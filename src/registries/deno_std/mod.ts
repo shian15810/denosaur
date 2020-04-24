@@ -9,20 +9,16 @@ class DenoStd {
   #latest?: string;
   #versions?: types.Version[];
   #database: types.Database = database;
-  #dependencies: types.Dependencies = {};
   #registry: types.Registry = {};
   #inited = false;
 
-  init = async (dependencies: types.Dependencies): Promise<void> => {
+  init = async (): Promise<void> => {
     if (this.#inited) return;
 
+    this.#inited = true;
     this.#database = { ...this.#database, ...(await init.getDatabase()) };
-    if (!(await init.getExists())) {
-      this.#inited = true;
-      return;
-    }
-
     this.#latest = await init.getLatest();
+
     if (this.#latest === undefined) {
       this.#versions = await init.getVersions();
       this.#latest = semver.maxSatisfying(
@@ -30,36 +26,28 @@ class DenoStd {
         "*",
       ) ?? undefined;
     }
+
     if (
-      this.#latest !== undefined &&
-      Object.keys(this.#database).includes(this.#latest)
+      this.#latest === undefined ||
+      !Object.keys(this.#database).includes(this.#latest)
     ) {
-      this.#dependencies = init.validateDependencies(dependencies);
-      this.#registry = init.toRegistry(
-        this.#database,
-        Object.keys(this.#dependencies),
+      if (this.#versions === undefined) {
+        this.#versions = await init.getVersions();
+      }
+      this.#versions = this.#versions.filter(
+        ({ version }) => this.#database[version] === undefined,
       );
-      this.#registry = init.initRegistry(this.#registry, this.#latest);
-      this.#inited = true;
-      return;
+      this.#database = {
+        ...this.#database,
+        ...(await init.getDatabaseFromVersions(this.#versions)),
+      };
     }
 
-    if (this.#versions === undefined) this.#versions = await init.getVersions();
-    this.#versions = this.#versions.filter(
-      ({ version }) => this.#database[version] === undefined,
-    );
-    this.#database = {
-      ...this.#database,
-      ...(await init.getDatabaseFromVersions(this.#versions)),
-    };
-    this.#dependencies = init.validateDependencies(dependencies);
-    this.#registry = init.toRegistry(
-      this.#database,
-      Object.keys(this.#dependencies),
-    );
-    this.#registry = init.initRegistry(this.#registry, this.#latest);
-    this.#inited = true;
+    this.#registry = init.toRegistry(this.#database);
   };
 }
 
 export default DenoStd;
+
+const denoStd = new DenoStd();
+denoStd.init();

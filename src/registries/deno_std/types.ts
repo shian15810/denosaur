@@ -11,14 +11,13 @@ type DatabaseVersion = {
 };
 type Database = { [version: string]: DatabaseVersion };
 
-type RegistryGithubModule = {
+type RegistryModule = {
   versioned: boolean;
   versions: string[];
   drafts: string[];
   prereleases: string[];
-  latest: string;
+  alias: { [alias: string]: string };
 };
-type RegistryModule = RegistryGithubModule;
 type Registry = { [module: string]: RegistryModule };
 
 export { Database, DatabaseVersion, Registry, Version };

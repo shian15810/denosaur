@@ -2,7 +2,6 @@
   "0.41.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -30,7 +29,6 @@
   "0.40.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -59,7 +57,6 @@
   "0.39.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -88,7 +85,6 @@
   "0.38.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -119,7 +115,6 @@
   "0.37.1": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -150,7 +145,6 @@
   "0.37.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -181,7 +175,6 @@
   "0.36.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -210,7 +203,6 @@
   "0.35.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -239,7 +231,6 @@
   "0.34.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -268,7 +259,6 @@
   "0.33.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -297,7 +287,6 @@
   "0.32.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -325,7 +314,6 @@
   "0.31.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -355,7 +343,6 @@
   "0.30.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -385,7 +372,6 @@
   "0.29.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -416,7 +402,6 @@
   "0.28.1": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -448,7 +433,6 @@
   "0.28.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -480,7 +464,6 @@
   "0.27.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -512,7 +495,6 @@
   "0.26.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -544,7 +526,6 @@
   "0.25.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -576,7 +557,6 @@
   "0.24.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bytes",
@@ -608,7 +588,6 @@
   "0.23.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bundle",
@@ -640,7 +619,6 @@
   "0.22.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bundle",
@@ -672,7 +650,6 @@
   "0.21.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": false,
     "modules": [
       "archive",
       "bundle",
@@ -704,7 +681,6 @@
   "0.20.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -735,7 +711,6 @@
   "0.19.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -766,7 +741,6 @@
   "0.18.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -797,7 +771,6 @@
   "0.17.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -827,7 +800,6 @@
   "0.16.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -857,7 +829,6 @@
   "0.15.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -887,19 +858,16 @@
   "0.14.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.13.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.12.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -929,7 +897,6 @@
   "0.11.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -960,7 +927,6 @@
   "0.10.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -990,7 +956,6 @@
   "0.9.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bundle",
@@ -1019,7 +984,6 @@
   "0.8.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bytes",
@@ -1046,7 +1010,6 @@
   "0.7.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bytes",
@@ -1073,7 +1036,6 @@
   "0.6.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "archive",
       "bytes",
@@ -1099,7 +1061,6 @@
   "0.5.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1124,7 +1085,6 @@
   "0.4.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1149,13 +1109,11 @@
   "0.3.11": {
     "draft": false,
     "prerelease": true,
-    "deprecated": true,
     "modules": []
   },
   "0.3.10": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1180,13 +1138,11 @@
   "0.3.9": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.3.8": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1211,13 +1167,11 @@
   "0.3.7": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.3.6": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1242,7 +1196,6 @@
   "0.3.5": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1267,7 +1220,6 @@
   "0.3.4": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1292,7 +1244,6 @@
   "0.3.3": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1315,7 +1266,6 @@
   "0.3.2": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "bytes",
       "colors",
@@ -1338,7 +1288,6 @@
   "0.3.1": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "benching",
       "bytes",
@@ -1362,7 +1311,6 @@
   "0.3.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "benching",
       "bytes",
@@ -1386,7 +1334,6 @@
   "0.2.11": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "benching",
       "bytes",
@@ -1411,7 +1358,6 @@
   "0.2.10": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "colors",
       "datetime",
@@ -1431,7 +1377,6 @@
   "0.2.9": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "colors",
       "datetime",
@@ -1451,7 +1396,6 @@
   "0.2.8": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "colors",
       "datetime",
@@ -1471,7 +1415,6 @@
   "0.2.7": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "colors",
       "datetime",
@@ -1490,7 +1433,6 @@
   "0.2.6": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "colors",
       "datetime",
@@ -1509,7 +1451,6 @@
   "0.2.5": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "colors",
       "datetime",
@@ -1525,7 +1466,6 @@
   "0.2.4": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": [
       "colors",
       "examples",
@@ -1538,103 +1478,86 @@
   "0.2.3": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.2.2": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.2.1": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.2.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.12": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.11": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.10": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.9": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.8": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.7": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.6": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.5": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.4": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.3": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.2": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.1": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   },
   "0.1.0": {
     "draft": false,
     "prerelease": false,
-    "deprecated": true,
     "modules": []
   }
 }
