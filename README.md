@@ -1,3 +1,0 @@
-# Denosaur
-
-Deno Package Manager
