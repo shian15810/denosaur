@@ -2,6 +2,7 @@ import * as semver from "pika:semver";
 
 import * as init from "./init.ts";
 import * as types from "./types.ts";
+import * as wretch from "../../wretch.ts";
 
 import database from "./database.json";
 
@@ -45,9 +46,29 @@ class DenoStd {
 
     this.#registry = init.toRegistry(this.#database);
   };
+
+  resolve = async (
+    module: string,
+    version: string,
+  ): Promise<string | undefined> => {
+    if (this.#registry[module] === undefined) return;
+
+    if (semver.validRange(version)) {
+      return (
+        semver.maxSatisfying(this.#registry[module].versions, version) ??
+        undefined
+      );
+    }
+
+    if (this.#registry[module].alias[version] !== undefined) return this.#registry[module].alias[version];
+
+    const tree = await wretch.githubCom
+      .url(`/denoland/deno/tree/${version}`)
+      .head()
+      .notFound(() => false)
+      .res(() => true);
+    if (tree) return version;
+  };
 }
 
 export default DenoStd;
-
-const denoStd = new DenoStd();
-denoStd.init();

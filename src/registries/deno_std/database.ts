@@ -4,11 +4,9 @@ import * as path from "deno_std:path";
 import * as init from "./init.ts";
 import * as types from "./types.ts";
 
-const getDatabase = async (): Promise<types.Database | undefined> => {
-  const exists = await init.getExists();
-  if (!exists) return;
+const getDatabase = async (): Promise<types.Database> => {
   const versions = await init.getVersions();
-  return init.getDatabase(versions);
+  return init.getDatabaseFromVersions(versions);
 };
 
 const writeDatabase = (database: types.Database): Promise<void> => {
@@ -18,12 +16,11 @@ const writeDatabase = (database: types.Database): Promise<void> => {
   return fs.writeJson(filename, database, { spaces: 2 });
 };
 
-const main = async (): Promise<void> => {
-  const database = await getDatabase();
-  if (database === undefined) return;
-  return writeDatabase(database);
-};
+const database = async (): Promise<void> => {
+  const db = await getDatabase();
+  return writeDatabase(db);
+}
 
-if (import.meta.main) await main();
+if (import.meta.main) await database();
 
-export default main;
+export default database;

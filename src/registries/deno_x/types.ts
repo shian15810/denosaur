@@ -27,7 +27,6 @@ type RegistryGithubModule = {
   owner: string;
   repo: string;
   path: string;
-  versioned: boolean;
   versions: string[];
   drafts: string[];
   prereleases: string[];
@@ -37,7 +36,6 @@ type RegistryNpmModule = {
   type: RegistryModuleType.Npm;
   url: string;
   name: string;
-  versioned: boolean;
   versions: string[];
   deprecateds: string[];
   alias: RegistryModuleAlias;
