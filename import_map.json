@@ -1,1 +1,8 @@
-{ "imports": {} }
+{
+  "imports": {
+    "deno_std:flags": "https://deno.land/std@v0.41.0/flags/mod.ts",
+    "deno_std:flags/": "https://deno.land/std@v0.41.0/flags/",
+    "deno_std:permissions": "https://deno.land/std@v0.41.0/permissions/mod.ts",
+    "deno_std:permissions/": "https://deno.land/std@v0.41.0/permissions/"
+  }
+}

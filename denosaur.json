@@ -1,1 +1,6 @@
-{ "dependencies": {} }
+{
+  "dependencies": {
+    "deno_std:flags": "^0.41.0",
+    "deno_std:permissions": "^0.41.0"
+  }
+}
