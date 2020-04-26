@@ -13,8 +13,8 @@ const flags = (): Flags => {
 };
 
 const permissions = (): Promise<void> => {
-  const names: Deno.PermissionName[] = ["env", "net", "read", "run", "write"];
-  return grantOrThrow(names.map((name) => ({ name })));
+  const perms: Deno.PermissionName[] = ["env", "net", "read", "run", "write"];
+  return grantOrThrow(perms.map((name) => ({ name })));
 };
 
 export { cwd, env, flags, permissions };
