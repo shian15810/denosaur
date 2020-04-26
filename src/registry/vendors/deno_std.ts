@@ -1,7 +1,7 @@
-import { Vendor } from "./types.ts";
+import Vendor from "./vendor.ts";
 
 class DenoStd implements Vendor {
-  init = (): Promise<this> => Promise.resolve(this);
+  init = (): Promise<void> => Promise.resolve();
 
   resolve = (module: string, rangeOrAlias: string): string => rangeOrAlias;
 }

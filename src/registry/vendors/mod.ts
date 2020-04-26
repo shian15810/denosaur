@@ -1,26 +1,41 @@
 import DenoStd from "./deno_std.ts";
 import DenoX from "./deno_x.ts";
 import Pika from "./pika.ts";
-import { Vendor } from "./types.ts";
 import Unpkg from "./unpkg.ts";
+import { unique } from "../../utils.ts";
 
-enum VendorName {
+enum Vendor {
   DenoStd = "deno_std",
   DenoX = "deno_x",
   Pika = "pika",
   Unpkg = "unpkg",
 }
 
-const isVendorName = (vendor: string): vendor is VendorName =>
-  Object.values<string>(VendorName).includes(vendor);
+const isVendor = (vendor: string): vendor is Vendor =>
+  Object.values<string>(Vendor).includes(vendor);
 
-type Vendors = { [vendor in VendorName]: Vendor };
-const vendors = async (): Promise<Vendors> => ({
-  [VendorName.DenoStd]: await new DenoStd().init(),
-  [VendorName.DenoX]: await new DenoX().init(),
-  [VendorName.Pika]: new Pika(),
-  [VendorName.Unpkg]: new Unpkg(),
-});
+class Vendors {
+  #denoStd = new DenoStd();
+  #denoX = new DenoX();
+  #pika = new Pika();
+  #unpkg = new Unpkg();
 
-export { isVendorName, VendorName };
-export default vendors;
+  get [Vendor.DenoStd](): DenoStd {
+    return this.#denoStd;
+  }
+  get [Vendor.DenoX](): DenoX {
+    return this.#denoX;
+  }
+  get [Vendor.Pika](): Pika {
+    return this.#pika;
+  }
+  get [Vendor.Unpkg](): Unpkg {
+    return this.#unpkg;
+  }
+
+  init = (vendors: Vendor[]): Promise<void[]> =>
+    Promise.all(unique(vendors).map((vendor) => this[vendor].init()));
+}
+
+export { isVendor, Vendor };
+export default Vendors;
