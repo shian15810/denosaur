@@ -1,7 +1,9 @@
 import { Vendor } from "./types.ts";
 
-class Unpkg implements Vendor {
+class DenoStd implements Vendor {
+  init = (): Promise<this> => Promise.resolve(this);
+
   resolve = (module: string, rangeOrAlias: string): string => rangeOrAlias;
 }
 
-export default Unpkg;
+export default DenoStd;
