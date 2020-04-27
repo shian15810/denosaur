@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "deno_std:flags": "^0.41.0",
-    "deno_std:permissions": "^0.41.0"
+    "deno_std:permissions": "^0.41.0",
+    "pika:semver": "^7.3.2",
+    "pika:wretch": "^1.7.2"
   }
 }

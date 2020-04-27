@@ -2,17 +2,16 @@ import DenoStd from "./deno_std.ts";
 import DenoX from "./deno_x.ts";
 import Pika from "./pika.ts";
 import Unpkg from "./unpkg.ts";
-import { unique } from "../../utils.ts";
 
-enum Vendor {
+enum VendorName {
   DenoStd = "deno_std",
   DenoX = "deno_x",
   Pika = "pika",
   Unpkg = "unpkg",
 }
 
-const isVendor = (vendor: string): vendor is Vendor =>
-  Object.values<string>(Vendor).includes(vendor);
+const isVendorName = (vendor: string): vendor is VendorName =>
+  Object.values<string>(VendorName).includes(vendor);
 
 class Vendors {
   #denoStd = new DenoStd();
@@ -20,22 +19,19 @@ class Vendors {
   #pika = new Pika();
   #unpkg = new Unpkg();
 
-  get [Vendor.DenoStd](): DenoStd {
+  get [VendorName.DenoStd](): DenoStd {
     return this.#denoStd;
   }
-  get [Vendor.DenoX](): DenoX {
+  get [VendorName.DenoX](): DenoX {
     return this.#denoX;
   }
-  get [Vendor.Pika](): Pika {
+  get [VendorName.Pika](): Pika {
     return this.#pika;
   }
-  get [Vendor.Unpkg](): Unpkg {
+  get [VendorName.Unpkg](): Unpkg {
     return this.#unpkg;
   }
-
-  init = (vendors: Vendor[]): Promise<void[]> =>
-    Promise.all(unique(vendors).map((vendor) => this[vendor].init()));
 }
 
-export { isVendor, Vendor };
+export { isVendorName, VendorName };
 export default Vendors;

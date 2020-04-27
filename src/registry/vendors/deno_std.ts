@@ -1,9 +1,13 @@
-import Vendor from "./vendor.ts";
+import { ResolvedVersion, Vendor } from "../types.ts";
 
 class DenoStd implements Vendor {
   init = (): Promise<void> => Promise.resolve();
 
-  resolve = (module: string, rangeOrAlias: string): string => rangeOrAlias;
+  resolveVersion = (
+    module: string,
+    rangeOrAlias: string,
+  ): Promise<ResolvedVersion | undefined> =>
+    Promise.resolve({ version: rangeOrAlias, isDeprecated: false });
 }
 
 export default DenoStd;

@@ -1,12 +1,13 @@
-import Vendors, { isVendor, Vendor } from "./vendors/mod.ts";
-import { isNotUndefined, isUndefined } from "../utils.ts";
+import { ResolvedVersion } from "./types.ts";
+import Vendors, { isVendorName, VendorName } from "./vendors/mod.ts";
+import { isNotUndefined, isUndefined, unique } from "../utils.ts";
 
-type ParsedDependency = { vendor: Vendor; module: string };
+type ParsedDependency = { vendor: VendorName; module: string };
 const parseDependency = (dependency: string): ParsedDependency | undefined => {
   const vendorAndModule = dependency.split(":");
   if (vendorAndModule.length !== 2 || vendorAndModule.includes("")) return;
   const [vendor, module] = vendorAndModule;
-  if (!isVendor(vendor)) return;
+  if (!isVendorName(vendor)) return;
   return { vendor, module };
 };
 
@@ -18,15 +19,24 @@ class Registry {
       .map(parseDependency)
       .filter(isNotUndefined)
       .map(({ vendor }) => vendor);
-    await this.#vendors.init(vendors);
+    await Promise.all(
+      unique(vendors).map((vendor) => this.#vendors[vendor].init()),
+    );
     return this;
   };
 
-  resolve = (dependency: string, rangeOrAlias: string): string | undefined => {
+  resolveVersion = async (
+    dependency: string,
+    rangeOrAlias: string,
+  ): Promise<ResolvedVersion | undefined> => {
     const parsedDependency = parseDependency(dependency);
     if (isUndefined(parsedDependency)) return;
     const { vendor, module } = parsedDependency;
-    return this.#vendors[vendor].resolve(module, rangeOrAlias);
+    const resolvedVersion = await this.#vendors[vendor].resolveVersion(
+      module,
+      rangeOrAlias,
+    );
+    return resolvedVersion;
   };
 }
 

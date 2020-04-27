@@ -3,6 +3,8 @@
     "deno_std:flags": "https://deno.land/std@v0.41.0/flags/mod.ts",
     "deno_std:flags/": "https://deno.land/std@v0.41.0/flags/",
     "deno_std:permissions": "https://deno.land/std@v0.41.0/permissions/mod.ts",
-    "deno_std:permissions/": "https://deno.land/std@v0.41.0/permissions/"
+    "deno_std:permissions/": "https://deno.land/std@v0.41.0/permissions/",
+    "pika:semver": "https://cdn.pika.dev/semver@v7.3.2",
+    "pika:wretch": "https://cdn.pika.dev/wretch@v1.7.2"
   }
 }
