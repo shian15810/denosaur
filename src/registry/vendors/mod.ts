@@ -4,10 +4,12 @@ import Pika from "./pika.ts";
 import Unpkg from "./unpkg.ts";
 
 enum VendorName {
+  /* eslint-disable no-shadow */
   DenoStd = "deno_std",
   DenoX = "deno_x",
   Pika = "pika",
   Unpkg = "unpkg",
+  /* eslint-enable no-shadow */
 }
 
 const isVendorName = (vendor: string): vendor is VendorName =>
